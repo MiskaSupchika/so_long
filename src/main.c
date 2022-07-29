@@ -6,7 +6,7 @@
 /*   By: rburner <rburner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 06:15:00 by rburner           #+#    #+#             */
-/*   Updated: 2022/06/11 05:36:06 by rburner          ###   ########.fr       */
+/*   Updated: 2022/07/01 00:15:01 by rburner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	appropriation(t_map *map)
 
 char	*read_map(char **av)
 {
-	int		i;
 	int		fd;
 	char	*line;
 	char	*all_line;
@@ -84,9 +83,8 @@ int	main(int ac, char **av)
 	}
 	map.map_line = read_map(av);
 	map.map = ft_split(map.map_line, '\n');
-	
 	free(map.map_line);
 	check_map(&map, av);
-	// free_map(&map);
+	free_map(&map);
 	return (0);
 }

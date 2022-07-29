@@ -23,27 +23,76 @@ int	key_press(int key, t_map *map)
 {
 	if (key == 97 || key == 123 || key == 0 || key == 65361)
 	{
-		left(map);
-		right_enemy(map);
+		map->key.left = 1;
+		drawing(map);
 	}
 	else if (key == 100 || key == 125 || key == 2 || key == 65363)
 	{
-		right(map);
-		left_enemy(map);
+		map->key.right = 1;
+		drawing(map);
 	}
 	else if (key == 1 || key == 125 || key == 115 || key == 65364)
 	{
-		up(map);
-		down_enemy(map);
+		map->key.up = 1;
+		drawing(map);
 	}
 	else if (key == 13 || key == 126 || key == 119 || key == 65362)
 	{
-		down(map);
-		up_enemy(map);
+		map->key.down = 1;
+		drawing(map);
 	}
 	else if (key == 53 || key == 65307)
-		exit (1);
-	draw(map);
+		map->key.exit = 1;
+	return (1);
+}
+
+int	key_release(int key, t_map *map)
+{
+	if (key == 97 || key == 123 || key == 0 || key == 65361)
+	{
+		map->key.left = 0;
+	}
+	else if (key == 100 || key == 125 || key == 2 || key == 65363)
+	{
+		map->key.right = 0;
+	}
+	else if (key == 1 || key == 125 || key == 115 || key == 65364)
+	{
+		map->key.up = 0;
+	}
+	else if (key == 13 || key == 126 || key == 119 || key == 65362)
+	{
+		map->key.down = 0;
+	}
+	return (1);
+}
+
+int	drawing(t_map *map)
+{
+	if (map->key.down || map->key.up || map->key.right || map->key.left
+		|| map->key.exit)
+	{
+		if (map->key.left)
+		{
+			left(map);
+		}
+		else if (map->key.right)
+		{
+			right(map);
+		}
+		else if (map->key.up)
+		{
+			up(map);
+		}
+		else if (map->key.down)
+		{
+			down(map);
+		}
+		else if (map->key.exit)
+			exit (1);
+		mlx_clear_window(map->mlx, map->win);
+		draw(map);
+	}
 	return (0);
 }
 

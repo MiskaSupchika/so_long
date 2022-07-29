@@ -6,7 +6,7 @@
 /*   By: rburner <rburner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:26:45 by rburner           #+#    #+#             */
-/*   Updated: 2022/06/11 04:28:20 by rburner          ###   ########.fr       */
+/*   Updated: 2022/07/01 00:23:14 by rburner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	left_enemy(t_map *map)
 		map->map[map->enemy.pos_y][map->enemy.pos_x] = 'N';
 	}
 	else if (map->map[map->enemy.pos_y][map->enemy.pos_x - 1] == 'P')
-		end_game(map);
-	// if (map->game.enemy == map->game.enemy1)
-	// 	map->game.enemy = map->game.enemy2;
+		end_game();
 }
 
 void	right_enemy(t_map *map)
@@ -55,8 +53,7 @@ void	right_enemy(t_map *map)
 		map->map[map->enemy.pos_y][map->enemy.pos_x] = 'N';
 	}
 	else if (map->map[map->enemy.pos_y][map->enemy.pos_x + 1] == 'P')
-		end_game(map);
-	//map->game.enemy = map->game.enemy2;
+		end_game();
 }
 
 void	up_enemy(t_map *map)
@@ -78,8 +75,7 @@ void	up_enemy(t_map *map)
 		map->map[map->enemy.pos_y][map->enemy.pos_x] = 'N';
 	}
 	else if (map->map[map->enemy.pos_y + 1][map->enemy.pos_x] == 'P')
-		end_game(map);
-	//map->game.enemy = map->game.enemy1;
+		end_game();
 }
 
 void	down_enemy(t_map *map)
@@ -101,6 +97,14 @@ void	down_enemy(t_map *map)
 		map->map[map->enemy.pos_y][map->enemy.pos_x] = 'N';
 	}
 	else if (map->map[map->enemy.pos_y - 1][map->enemy.pos_x] == 'P')
-		end_game(map);
-	//map->game.enemy = map->game.enemy2;
+		end_game();
+}
+
+void	*draw_player(t_map *map)
+{
+	if (map->key.left)
+		return (map->game.player2->texture);
+	else if (map->key.right)
+		return (map->game.player3->texture);
+	return (map->game.player->texture);
 }

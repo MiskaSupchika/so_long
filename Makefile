@@ -19,7 +19,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 HEADER		=	so_long.h
 
-CFLAGS		=	#-Werror -Wall -Wextra
+CFLAGS		=	-g -Werror -Wall -Wextra
 
 CC			=	gcc
 
@@ -31,9 +31,6 @@ FRAMEWORK	=	-framework openGL -framework AppKit
 
 NONE='\033[0m'
 GREEN='\033[32m'
-
-.c :.o	${HEADER}
-	${CC} ${CFLAGS} -c $< -o $@
 
 #%.o: %.c
 #	$(CC) ${CFLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -56,7 +53,7 @@ $(LIBFT):
 	make -C ./libft
 
 clean:
-	rm -rf *.o
+	rm -rf ${OBJS} ${BONUS_OBJS}
 
 fclean: clean
 	rm -rf $(NAME)

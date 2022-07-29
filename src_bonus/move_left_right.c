@@ -41,11 +41,12 @@ void	left(t_map *map)
 		map->map[map->player.pos_y][map->player.pos_x] = 'P';
 	}
 	else if (map->map[map->player.pos_y][map->player.pos_x - 1] == 'N')
-		end_game(map);
+		end_game();
 	else if (map->map[map->player.pos_y][map->player.pos_x - 1] == 'E'
 		&& map->game_point == 0)
-		end_game(map);
+		end_game();
 	map->score++;
+	right_enemy(map);
 }
 
 void	right(t_map *map)
@@ -63,9 +64,10 @@ void	right(t_map *map)
 		map->map[map->player.pos_y][map->player.pos_x] = 'P';
 	}
 	else if (map->map[map->player.pos_y][map->player.pos_x + 1] == 'N')
-		end_game(map);
+		end_game();
 	else if (map->map[map->player.pos_y][map->player.pos_x + 1] == 'E'
 		&& map->game_point == 0)
-		end_game(map);
+		end_game();
+	left_enemy(map);
 	map->score++;
 }

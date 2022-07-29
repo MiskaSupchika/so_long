@@ -6,7 +6,7 @@
 /*   By: rburner <rburner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:44:26 by rburner           #+#    #+#             */
-/*   Updated: 2022/06/10 19:27:55 by rburner          ###   ########.fr       */
+/*   Updated: 2022/07/01 00:23:14 by rburner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ void	up(t_map *map)
 		map->map[map->player.pos_y][map->player.pos_x] = 'P';
 	}
 	else if (map->map[map->player.pos_y + 1][map->player.pos_x] == 'N')
-		end_game(map);
+		end_game();
 	else if (map->map[map->player.pos_y + 1][map->player.pos_x] == 'E'
 		&& map->game_point == 0)
-		end_game(map);
+		end_game();
 	map->score++;
+	down_enemy(map);
 }
 
 void	down(t_map *map)
@@ -63,9 +64,10 @@ void	down(t_map *map)
 		map->map[map->player.pos_y][map->player.pos_x] = 'P';
 	}
 	else if (map->map[map->player.pos_y - 1][map->player.pos_x] == 'N')
-		end_game(map);
+		end_game();
 	else if (map->map[map->player.pos_y - 1][map->player.pos_x] == 'E'
 		&& map->game_point == 0)
-		end_game(map);
+		end_game();
+	up_enemy(map);
 	map->score++;
 }

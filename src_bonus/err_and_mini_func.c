@@ -6,7 +6,7 @@
 /*   By: rburner <rburner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:29:13 by rburner           #+#    #+#             */
-/*   Updated: 2022/06/10 21:08:44 by rburner          ###   ########.fr       */
+/*   Updated: 2022/07/01 00:23:55 by rburner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	position_enemy(t_map *map, int i, int j)
 	map->enemy.pos_y = i;
 }
 
-void	end_game(t_map *map)
+void	end_game(void)
 {
 	write(1, "Game is over\n", 14);
 	exit (0);

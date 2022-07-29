@@ -36,20 +36,18 @@ void	init_images(t_map *map)
 		|| !map->game.player->texture || !map->game.enemy->texture
 		|| !map->game.colectible->texture || !map->game.exit->texture)
 		ft_err("file not found");
-	//animation_enemy(map);
 }
 
 void	animation_enemy(t_map *map)
 {
-	map->game.enemy1->texture = mlx_xpm_file_to_image(map->mlx,
-		"./texture/fball2.xpm", &map->game.enemy->width,
-		&map->game.enemy->height);
-	map->game.enemy2->texture = mlx_xpm_file_to_image(map->mlx,
-		"./texture/fball3.xpm", &map->game.enemy->width,
-		&map->game.enemy->height);
-	if (!map->game.enemy1->texture || !map->game.enemy2->texture)
+	map->game.player2->texture = mlx_xpm_file_to_image(map->mlx,
+			"./texture/play2.xpm", &map->game.enemy->width,
+			&map->game.enemy->height);
+	map->game.player3->texture = mlx_xpm_file_to_image(map->mlx,
+			"./texture/play1.xpm", &map->game.enemy->width,
+			&map->game.enemy->height);
+	if (!map->game.player2->texture || !map->game.player3->texture)
 		ft_err("file not found");
-	map->game.enemy = map->game.enemy1;
 }
 
 void	memory_texture(t_map *map)
@@ -60,8 +58,12 @@ void	memory_texture(t_map *map)
 	map->game.colectible = malloc(sizeof(t_texture));
 	map->game.exit = malloc(sizeof(t_texture));
 	map->game.enemy = malloc(sizeof(t_texture));
-	map->game.enemy1 = malloc(sizeof(t_texture));
-	map->game.enemy2 = malloc(sizeof(t_texture));
+	map->game.player2 = malloc(sizeof(t_texture));
+	map->game.player3 = malloc(sizeof(t_texture));
+	if (!map->game.wall || !map->game.floor || !map->game.player
+		|| !map->game.colectible || !map->game.exit || !map->game.enemy
+		|| !map->game.player2 || !map->game.player3)
+		ft_err("memory not found");
 }
 
 void	draw_texture(t_map *map, int i, int j)
@@ -73,7 +75,7 @@ void	draw_texture(t_map *map, int i, int j)
 		mlx_put_image_to_window(map->mlx, map->win, map->game.floor->texture,
 			j * map->game.floor->height, i * map->game.floor->width);
 	else if (map->map[i][j] == 'P')
-		mlx_put_image_to_window(map->mlx, map->win, map->game.player->texture,
+		mlx_put_image_to_window(map->mlx, map->win, draw_player(map),
 			j * map->game.player->height, i * map->game.player->width);
 	else if (map->map[i][j] == 'C')
 		mlx_put_image_to_window(map->mlx, map->win,

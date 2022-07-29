@@ -6,7 +6,7 @@
 /*   By: rburner <rburner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 14:42:03 by rburner           #+#    #+#             */
-/*   Updated: 2022/06/11 05:37:23 by rburner          ###   ########.fr       */
+/*   Updated: 2022/07/01 00:15:37 by rburner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	unacceptable_symbols(t_map *map)
 	i = 0;
 	while (map->map[i])
 	{
-		if (ft_strlen(map->map[i]) != map->height)
+		if (ft_strlen(map->map[i]) != (size_t)map->height)
 			ft_err(" map isn't");
 		i++;
 	}
@@ -119,8 +119,8 @@ void	check_map(t_map *map, char **av)
 	check_characters(map, 0, 0);
 	walls(map, 0, 0);
 	map->mlx = mlx_init();
-	map->win = mlx_new_window(map->mlx, 64 * map->width,
-			64 * map->height, "so_long");
+	map->win = mlx_new_window(map->mlx, 32 * map->height,
+			32 * map->width, "so_long");
 	init_images(map);
 	draw(map);
 	mlx_key_hook(map->win, key_press, map);

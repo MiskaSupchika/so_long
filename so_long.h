@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <stdbool.h>
 
 //# define LEFT 0 
 //# define LEFT 123
@@ -33,6 +34,15 @@
 //# define RIGHT 124
 # define RIGHT 100
 //# define RIGHT 65363
+
+typedef struct s_key
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+	bool	exit;
+}			t_key;
 
 typedef struct s_texture
 {
@@ -83,6 +93,7 @@ typedef struct s_map
 	t_enemy		enemy;
 	t_player	player;
 	t_game		game;
+	t_key		key;
 }			t_map;
 
 void	left_enemy(t_map *map);
@@ -92,6 +103,7 @@ void	down_enemy(t_map *map);
 void	move_enemy(t_map *map);
 void	position_enemy(t_map *map, int i, int j);
 void	animation_enemy(t_map *map);
+void	*draw_player(t_map *map);
 
 void	empty_line(char **av, t_map *map);
 void	unacceptable_symbols(t_map *map);
@@ -102,6 +114,9 @@ void	memory_texture(t_map *map);
 
 int		close_x(t_map *map);
 int		key_press(int key, t_map *map);
+int		key_release(int key, t_map *map);
+int		drawing(t_map *map);
+
 int		close_win(int key);
 
 void	left(t_map *map);
@@ -119,6 +134,6 @@ void	position_player(t_map *map, int i, int j);
 void	position_enemy(t_map *map, int i, int j);
 void	free_map(t_map *map);
 int		ft_strcmp(const char *str1, const char *str2);
-void	end_game(t_map *map);
+void	end_game(void);
 
 #endif 
